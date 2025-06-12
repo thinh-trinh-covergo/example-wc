@@ -1,0 +1,49 @@
+let manager
+
+class Example extends HTMLElement {
+  constructor() {
+    super();
+    this.innerHTML = `
+        <div>
+            Hello CGP Fellows! This is an Example WebComponent ❤️
+            <button id="button">Click me!</button>
+            <div>
+            <span>Message from host:</span>
+            <span id="message"></span>
+            </div>
+        </div>
+        `
+  }
+
+  connectedCallback() {
+  }
+}
+
+customElements.define("cgp-example", Example)
+
+const initialise = async ({eventManager, root}) => {
+  console.log("`cgp-example` is initialised!")
+
+  eventManager.subscribe(async event => {
+    if (event.type === 'host:message') {
+      root.getElementById("message").innerText = event.data
+    }
+  })
+
+
+  root.getElementById("button").addEventListener("click", () => {
+    eventManager.publish({
+      type: 'wc:message',
+      data: "Hello from WebComponent!"
+    })
+  })
+}
+
+const destroy = async () => {
+  console.log("`cgp-example` is destroyed!")
+}
+
+export {
+  initialise,
+  destroy
+}
