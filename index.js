@@ -24,10 +24,8 @@ customElements.define("cgp-example", Example)
 const initialise = async ({eventManager, root}) => {
   console.log("`cgp-example` is initialised!")
 
-  eventManager.subscribe(async event => {
-    if (event.type === 'host:message') {
-      root.getElementById("message").innerText = event.data
-    }
+  eventManager.subscribe(event => {
+    console.log("RECEIVED EVENT FROM HOST:", event)
   })
 
 
