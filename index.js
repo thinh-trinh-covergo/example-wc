@@ -21,8 +21,9 @@ class Example extends HTMLElement {
 
 customElements.define("cgp-example", Example)
 
-const initialise = async ({eventManager, root}) => {
-  console.log("`cgp-example` is initialised!")
+const initialise = async (args) => {
+  console.log("`cgp-example` is initialised with", args)
+  const { eventManager, root } = args
 
   eventManager.subscribe(event => {
     console.log("RECEIVED EVENT FROM HOST:", event)
