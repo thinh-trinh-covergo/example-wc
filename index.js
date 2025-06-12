@@ -1,4 +1,4 @@
-let manager
+let unsubscribe
 
 class Example extends HTMLElement {
   constructor() {
@@ -25,9 +25,9 @@ const initialise = async (args) => {
   console.log("`cgp-example` is initialised with", args)
   const { eventManager, root } = args
 
-  eventManager.subscribe(event => {
+  unsubscribe = eventManager.subscribe(event => {
     console.log("RECEIVED EVENT FROM HOST:", event)
-  })
+  }).unsubscribe
 
 
   root.getElementById("button").addEventListener("click", () => {
@@ -40,6 +40,7 @@ const initialise = async (args) => {
 
 const destroy = async () => {
   console.log("`cgp-example` is destroyed!")
+  unsubscribe()
 }
 
 export {
