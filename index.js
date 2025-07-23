@@ -1,5 +1,3 @@
-let unsubscribe
-
 class Example extends HTMLElement {
   constructor() {
     super();
@@ -8,9 +6,6 @@ class Example extends HTMLElement {
             CoverGo Platform
         </div>
         `
-  }
-
-  connectedCallback() {
   }
 }
 
@@ -29,7 +24,6 @@ const initialise = async (args) => {
 
 const destroy = async () => {
   console.log("`cgp-example` is destroyed!")
-  unsubscribe()
 }
 
 export {
