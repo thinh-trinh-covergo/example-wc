@@ -5,7 +5,6 @@ class Example extends HTMLElement {
         <div id="inner-html">
             CoverGo Platform
         </div>
-        <div>=========</div>
         <button id="button">Send event to host</button>
         `
   }
