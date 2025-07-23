@@ -24,7 +24,6 @@ const initialise = async (args) => {
     <div>The plugin has been initialized with</div>
     <div>=========</div>
     <pre>${JSON.stringify(args, null, 2)}</pre>
-    <div>=========</div>
   `
 
   unsubscribe = eventManager.subscribe("PARTY:CREATED", ({ type, data }) => {
