@@ -13,7 +13,9 @@ class Example extends HTMLElement {
   }
 }
 
-customElements.define("cgp-example", Example)
+if (!window.customElements.get("cgp-example")) {
+  customElements.define("cgp-example", Example)
+}
 
 const initialise = async (args) => {
   console.log("`cgp-example` is initialised with", args)
