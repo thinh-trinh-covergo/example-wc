@@ -17,13 +17,13 @@ customElements.define("cgp-example", Example)
 
 const initialise = async (args) => {
   console.log("`cgp-example` is initialised with", args)
-  const { eventManager, root } = args
+  const { eventManager, root, context } = args
 
   const content = root.getElementById("inner-html");
   content.innerHTML = `
     <div>The plugin has been initialized with</div>
     <div>=========</div>
-    <pre>${JSON.stringify(args, null, 2)}</pre>
+    <pre>${JSON.stringify(context, null, 2)}</pre>
   `
 
   unsubscribe = eventManager.subscribe("PARTY:CREATED", ({ type, data }) => {
