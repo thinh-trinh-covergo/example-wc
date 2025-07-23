@@ -5,6 +5,7 @@ class Example extends HTMLElement {
         <div id="inner-html">
             CoverGo Platform
         </div>
+        <div>=========</div>
         <button id="button">Send event to host</button>
         `
   }
@@ -14,12 +15,14 @@ customElements.define("cgp-example", Example)
 
 const initialise = async (args) => {
   console.log("`cgp-example` is initialised with", args)
-  const { eventMaager, root } = args
+  const { eventManager, root } = args
 
   const content = root.getElementById("inner-html");
   content.innerHTML = `
     <div>The plugin has been initialized with</div>
+    <div>=========</div>
     <pre>${JSON.stringify(args, null, 2)}</pre>
+    <div>=========</div>
   `
 
   root.getElementById("button").addEventListener("click", () => {
