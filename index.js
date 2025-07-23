@@ -18,19 +18,13 @@ customElements.define("cgp-example", Example)
 
 const initialise = async (args) => {
   console.log("`cgp-example` is initialised with", args)
-  const { eventManager, root } = args
+  const { root } = args
 
-  unsubscribe = eventManager.subscribe(event => {
-    console.log("RECEIVED EVENT FROM HOST:", event)
-  }).unsubscribe
-
-
-  root.getElementById("button").addEventListener("click", () => {
-    eventManager.publish({
-      type: 'wc:message',
-      data: "Hello from WebComponent!"
-    })
-  })
+  const content = root.getElementById("inner-html");
+  content.innerHTML = `
+    <div>The plugin has been initialized with</div>
+    <div>${JSON.stringify(args, null, 2)}</div
+  `
 }
 
 const destroy = async () => {
