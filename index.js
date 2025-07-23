@@ -29,8 +29,11 @@ const initialise = async (args) => {
 
   unsubscribe = eventManager.subscribe("PARTY:CREATED", ({ type, data }) => {
     root.getElementById("event").innerHTML = `
-      <pre>Type: ${type}</pre>
+      <div>=========</div>
+      
+      <pre>Received event: ${type}</pre>
       <pre>${JSON.stringify(data, null, 2)}</pre>
+      <div>=========</div>
     `
   }).unsubscribe;
 
