@@ -27,7 +27,12 @@ const initialise = async (args) => {
     <div>=========</div>
   `
 
-  unsubscribe = eventManager.subscribe("PARTY:CREATED", console.log).unsubscribe;
+  unsubscribe = eventManager.subscribe("PARTY:CREATED", ({ type, data }) => {
+    root.getElementById("event").innerHTML = `
+      <pre>Type: ${type}</pre>
+      <pre>${JSON.stringify(data, null, 2)}</pre>
+    `
+  }).unsubscribe;
 
   root.getElementById("button").addEventListener("click", () => {
     eventManager.publish({
