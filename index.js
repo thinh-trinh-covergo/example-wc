@@ -4,13 +4,8 @@ class Example extends HTMLElement {
   constructor() {
     super();
     this.innerHTML = `
-        <div>
-            Hello CGP Fellows! This is an Example WebComponent ❤️
-            <button id="button">Click me!</button>
-            <div>
-            <span>Message from host:</span>
-            <span id="message"></span>
-            </div>
+        <div id="inner-html">
+            CoverGo Platform
         </div>
         `
   }
