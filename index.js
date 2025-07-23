@@ -1,3 +1,5 @@
+let unsubscribe
+
 class Example extends HTMLElement {
   constructor() {
     super();
@@ -5,6 +7,7 @@ class Example extends HTMLElement {
         <div id="inner-html">
             CoverGo Platform
         </div>
+        <div id="event"></div>
         <button id="button">Send event to host</button>
         `
   }
@@ -24,6 +27,8 @@ const initialise = async (args) => {
     <div>=========</div>
   `
 
+  unsubscribe = eventManager.subscribe("PARTY:CREATED", console.log).unsubscribe;
+
   root.getElementById("button").addEventListener("click", () => {
     eventManager.publish({
       type: 'wc:message',
@@ -34,6 +39,7 @@ const initialise = async (args) => {
 
 const destroy = async () => {
   console.log("`cgp-example` is destroyed!")
+  unsubscribe?.()
 }
 
 export {
