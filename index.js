@@ -25,7 +25,7 @@ const initialise = async (args) => {
   content.innerHTML = `
     <div>The plugin has been initialized with</div>
     <div>=========</div>
-    <pre>${JSON.stringify(context, null, 2)}</pre>
+    <pre>${JSON.stringify({ ...context, data: Object.fromEntries(context.data.entries())}, null, 2)}</pre>
   `
 
   unsubscribe = eventManager.subscribe("PARTY:CREATED", ({ type, data }) => {
