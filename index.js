@@ -28,7 +28,7 @@ class Example extends HTMLElement {
       <pre>${JSON.stringify(context, null, 2)}</pre>
     `
   
-    this.unsubscribe = eventManager.subscribe("cgp:party:modified", ({ type, data }) => {
+    this.unsubscribe = eventManager.subscribe("cgp:party:modified", async ({ type, data }) => {
       console.log("[cgp-example][EVENT]", data)  
       this.shadowRoot.getElementById("event").innerHTML = `
           <div>=========</div>
@@ -46,3 +46,4 @@ class Example extends HTMLElement {
 if (!window.customElements.get("cgp-example")) {
   customElements.define("cgp-example", Example)
 }
+
