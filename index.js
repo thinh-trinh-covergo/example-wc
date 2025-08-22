@@ -3,7 +3,8 @@ class Example extends HTMLElement {
   
   constructor() {
     super();
-    this.innerHTML = `
+    this.attachShadow({ mode: 'open' })
+    this.shadowRoot.innerHTML = `
         <div id="inner-html">
             CoverGo Platform
         </div>
@@ -18,9 +19,9 @@ class Example extends HTMLElement {
 
   initialise = async (args) => {
     console.log("`cgp-example` is initialised with", args)
-    const { eventManager, root, context } = args
+    const { eventManager, context } = args
   
-    const content = root.getElementById("inner-html");
+    const content = this.shadowRoot.getElementById("inner-html");
     content.innerHTML = `
       <div>The plugin has been initialized with</div>
       <div>=========</div>
@@ -28,7 +29,8 @@ class Example extends HTMLElement {
     `
   
     this.unsubscribe = eventManager.subscribe("cgp:party:modified", ({ type, data }) => {
-        root.getElementById("event").innerHTML = `
+      console.log("[cgp-example][EVENT]", data)  
+      this.shadowRoot.getElementById("event").innerHTML = `
           <div>=========</div>
           
           <pre>Received event: ${type}</pre>
@@ -36,16 +38,11 @@ class Example extends HTMLElement {
           <div>=========</div>
         `
       }).unsubscribe;
-    }
+  }
 
-  destroy() {}
+  destroy = async () => {}
 }
 
 if (!window.customElements.get("cgp-example")) {
   customElements.define("cgp-example", Example)
-}
-
-export {
-  initialise,
-  destroy
 }
