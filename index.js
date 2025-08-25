@@ -12,11 +12,6 @@ class Example extends HTMLElement {
         `
   }
 
-  disconnectedCallback() {
-    console.log("`cgp-example` is destroyed!")
-    unsubscribe?.()
-  }
-
   initialise = async (args) => {
     console.log("`cgp-example` is initialised with", args)
     const { eventManager, context } = args
@@ -25,10 +20,10 @@ class Example extends HTMLElement {
     content.innerHTML = `
       <div>The plugin has been initialized with</div>
       <div>=========</div>
-      <pre>${JSON.stringify(context, null, 2)}</pre>
+      <pre>${JSON.stringify({ ...context, data: Object.fromEntries(context.data) }, null, 2)}</pre>
     `
   
-    this.unsubscribe = eventManager.subscribe("cgp:party:modified", async ({ type, data }) => {
+    this.unsubscribe = eventManager.subscribe("*", async ({ type, data }) => {
       console.log("[cgp-example][EVENT]", data)  
       this.shadowRoot.getElementById("event").innerHTML = `
           <div>=========</div>
@@ -40,7 +35,10 @@ class Example extends HTMLElement {
       }).unsubscribe;
   }
 
-  destroy = async () => {}
+  destroy = async () => {
+    console.log("`cgp-example` is destroyed!")
+    unsubscribe?.()
+  }
 }
 
 if (!window.customElements.get("cgp-example")) {
