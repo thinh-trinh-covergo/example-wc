@@ -13,7 +13,7 @@ class Example extends HTMLElement {
         `
   }
 
-  initialise = async (args) => {
+  async initialise(args) {
     console.log("`cgp-example` is initialised with", args)
     const { eventManager, context } = args
   
@@ -45,7 +45,7 @@ class Example extends HTMLElement {
     })
   }
 
-  destroy = async () => {
+  disconnectedCallback() {
     console.log("`cgp-example` is destroyed!")
     unsubscribe?.()
   }
