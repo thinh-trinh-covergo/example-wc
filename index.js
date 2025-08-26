@@ -5,6 +5,7 @@ class Example extends HTMLElement {
     super();
     this.attachShadow({ mode: 'open' })
     this.shadowRoot.innerHTML = `
+        <button id="button">Send event</button>
         <div id="inner-html">
             CoverGo Platform
         </div>
@@ -33,6 +34,15 @@ class Example extends HTMLElement {
           <div>=========</div>
         `
       }).unsubscribe;
+
+    this.shadowRoot.getElementById("button").addEventListener("click", () => {
+      eventManager.publish({
+        type: "cgp:debug:event",
+        data: {
+          "foo": "bar"
+        }
+      })
+    })
   }
 
   destroy = async () => {
