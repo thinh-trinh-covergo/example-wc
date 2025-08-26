@@ -24,7 +24,7 @@ class Example extends HTMLElement {
       <pre>${JSON.stringify({ ...context, data: Object.fromEntries(context.data) }, null, 2)}</pre>
     `
   
-    this.unsubscribe = eventManager.subscribe("*", async ({ type, data }) => {
+    this.unsubscribe = eventManager.subscribe("cgp:*", async ({ type, data }) => {
       console.log("[cgp-example][EVENT]", data)  
       this.shadowRoot.getElementById("event").innerHTML = `
           <div>=========</div>
@@ -37,7 +37,7 @@ class Example extends HTMLElement {
 
     this.shadowRoot.getElementById("button").addEventListener("click", () => {
       eventManager.publish({
-        type: "cgp:debug:event",
+        type: "plugin:debug:event",
         data: {
           "foo": "bar"
         }
