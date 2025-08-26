@@ -47,7 +47,7 @@ class Example extends HTMLElement {
 
   disconnectedCallback() {
     console.log("`cgp-example` is destroyed!")
-    unsubscribe?.()
+    this.unsubscribe?.()
   }
 }
 
