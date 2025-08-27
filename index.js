@@ -21,7 +21,7 @@ class Example extends HTMLElement {
     content.innerHTML = `
       <div>The plugin has been initialized with</div>
       <div>=========</div>
-      <pre>${JSON.stringify({ ...context, data: Object.fromEntries(context.data) }, null, 2)}</pre>
+      <pre>${JSON.stringify(context, null, 2)}</pre>
     `
   
     this.unsubscribe = eventManager.subscribe("cgp:*", async ({ type, data }) => {
