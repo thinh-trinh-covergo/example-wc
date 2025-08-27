@@ -6,6 +6,10 @@ class Example extends HTMLElement {
     this.attachShadow({ mode: 'open' })
     this.shadowRoot.innerHTML = `
         <button id="button">Send event</button>
+        <div>
+          <input type="checkbox" id="unblock-party" name="unlbock">
+<label for="unblock">Block party update/create</label><br>
+        </div>
         <div id="inner-html">
             CoverGo Platform
         </div>
@@ -25,7 +29,7 @@ class Example extends HTMLElement {
     `
   
     this.unsubscribe = eventManager.subscribe("cgp:*", async ({ type, data }) => {
-      console.log("[cgp-example][EVENT]", data)  
+      console.log("[cgp-example][EVENT]", `[${type}]`, data)
       this.shadowRoot.getElementById("event").innerHTML = `
           <div>=========</div>
           
@@ -33,6 +37,13 @@ class Example extends HTMLElement {
           <pre>${JSON.stringify(data, null, 2)}</pre>
           <div>=========</div>
         `
+
+        if (type === "cgp:party:before-save") {
+          const shouldBlock =  !!this.shadowRoot.getElementById("unblock-party").checked;
+          return {
+            block: shouldBlock
+          }
+        }
       }).unsubscribe;
 
     this.shadowRoot.getElementById("button").addEventListener("click", () => {
